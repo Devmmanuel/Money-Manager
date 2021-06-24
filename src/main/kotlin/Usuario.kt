@@ -1,2 +1,3 @@
-class Usuario {
+class Usuario(username : String, password : String) {
+    
 }
