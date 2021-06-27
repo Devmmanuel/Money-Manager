@@ -1,11 +1,11 @@
 
 class Account(
-    var accountNname : String,
-    var balance : Float = 0f,
-    var currency : String = "MXN") {
+    private var accountNname : String,
+    private var balance : Float = 0f,
+    private var currency : String = "MXN") {
 
 
-    val list = mutableListOf<Movement>()
+    private val list = mutableListOf<Movement>()
 
     fun getTransaccionList() {
         for (trans in list){
@@ -15,6 +15,10 @@ class Account(
 
     fun editBalance (newBalance : Float){
         balance = newBalance
+    }
+
+    fun getBalance() {
+        println("El balnce de la cuenta es $balance")
     }
 
 
