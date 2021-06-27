@@ -8,7 +8,8 @@ fun main() {
     val cuenta1 = Account("Main")
     cuenta1.getBalance()
     cuenta1.editBalance(100f)
-    cuenta1.getBalance()
+    println("El balance de la cuenta ${cuenta1.getAccountName()} es ${cuenta1.getBalance()}")
+    cuenta1.printDetails()
     //cuenta1.getTransaccionList()
 
     val user1 = User()

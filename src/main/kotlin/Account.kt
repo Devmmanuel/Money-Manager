@@ -1,6 +1,6 @@
 
 class Account(
-    private var accountNname : String,
+    private var accountName : String,
     private var balance : Float = 0f,
     private var currency : String = "MXN") {
 
@@ -17,8 +17,17 @@ class Account(
         balance = newBalance
     }
 
-    fun getBalance() {
-        println("El balnce de la cuenta es $balance")
+    fun getBalance() :Float {
+        return balance
+    }
+    fun getAccountName() : String {
+        return accountName
+    }
+
+    fun printDetails(){
+        println("""
+            El nombre de la cuenta es $accountName 
+            El balance de la cuenta es $balance $currency""".trimMargin())
     }
 
 
