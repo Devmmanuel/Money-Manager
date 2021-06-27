@@ -9,7 +9,7 @@ class Account(
 
     fun getTransaccionList() {
         for (trans in list){
-            println("Esta es la $trans")
+            println("Esta es la ${trans.getName()} de ${trans.getAmount()}")
         }
     }
 
@@ -22,6 +22,9 @@ class Account(
     }
     fun getAccountName() : String {
         return accountName
+    }
+    fun addMovement(movement : Movement) {
+        list.add(movement)
     }
 
     fun printDetails(){
