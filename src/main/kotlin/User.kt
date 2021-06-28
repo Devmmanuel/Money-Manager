@@ -122,6 +122,14 @@ class User(
         }
         return cuenta1
     }
+    fun getGeneralBalance() : Float{
+        var TotalBalance = 0f
+        for (cuenta in accountLists){
+            TotalBalance+=cuenta.getTotalIncome()
+            TotalBalance-=cuenta.getTotalExpense()
+        }
+        return TotalBalance
+    }
 
     fun desplegarMenu() {
         do {
@@ -133,7 +141,9 @@ class User(
             2 -> Ver Cuentas
             3 -> Agregar una gasto
             4 -> Agregar un ingreso
-            5 -> Cerrar Sesion""".trimMargin()
+            5 -> Ver gastos
+            6 -> Ver Ingresos
+            7 -> Cerrar Sesion""".trimMargin()
 
             )
             val choice = readLine().toString()
@@ -142,7 +152,10 @@ class User(
                     createAccount()
                 }
                 "2" -> {
+                    println("-------------------------------------------")
                     getAccountLists()
+                    println("---Balance General: ${getGeneralBalance()}---")
+                    println("-------------------------------------------")
                 }
                 "3" -> {
                     println("A que cuenta desea agregar el gasto")
@@ -180,10 +193,28 @@ class User(
                     val fechaIngreso = readLine().toString()
                     cuenta.addIncome(Movement(nombreIngreso, descripcionIngreso, montoIngreso, fechaIngreso))
                 }
-                "5" -> logOut()
+                "5" -> {
+                    println("De que cuenta desea visualizar los gastos")
+                    getAccountLists()
+
+                    println("Teclee el nombre de la cuenta")
+                    val opcion = readLine().toString()
+                    val cuenta = getAccount(opcion)
+                    cuenta.printExpensesList()
+                }
+                "6" -> {
+                    println("De que cuenta desea visualizar los Ingresos")
+                    getAccountLists()
+
+                    println("Teclee el nombre de la cuenta")
+                    val opcion = readLine().toString()
+                    val cuenta = getAccount(opcion)
+                    cuenta.printIncomeList()
+                }
+                "7" -> logOut()
             }
 
-        }while (choice != "5")
+        }while (choice != "7")
     }
 
 }

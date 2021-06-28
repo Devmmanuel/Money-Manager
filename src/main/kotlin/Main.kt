@@ -5,6 +5,7 @@ fun main() {
 
 
     //Inicio Codigo de prueba
+    /*
     val cuenta1 = Account("Main")
     cuenta1.getBalance()
     //cuenta1.editBalance(100f)
@@ -36,13 +37,12 @@ fun main() {
 
     cuenta1.printExpensesList()
     cuenta1.printIncomeList()
-
+*/
     //Metodos de acceso a los datos de gasto, ingreso y balance de "cuenta1"
 
-    println("Tu total de gastos ${cuenta1.getTotalExpense()}")
-    println("Tu total de Ingresos ${cuenta1.getTotalIncome()}")
-    println("Tu balance general es ${cuenta1.getBalance()}")
-
+    //println("Tu total de gastos ${cuenta1.getTotalExpense()}")
+    //println("Tu total de Ingresos ${cuenta1.getTotalIncome()}")
+    //println("Tu balance general es ${cuenta1.getBalance()}")
 
 
     //Filtrar por mes
