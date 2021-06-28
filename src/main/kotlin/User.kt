@@ -7,7 +7,6 @@ class User(
     var totalExpenses: Float = 0f ) {
 
     val accountLists = mutableListOf<Account>()
-    val movementList = mutableListOf<Movement>()
 
     init {
         println("Thanks for join us")
@@ -35,16 +34,6 @@ class User(
     fun logOut() {
         if (logIn()) {
             println("Cerrando Sesión")
-        }
-    }
-
-    // metodo para obtener la lista de movimientos
-    fun getMovementList() {
-        println("El usuario cuenta con los siguientes movimientos: ")
-        movementList.forEach {
-            println("${it.name} " +
-                    "${it.description} " +
-                    "${it.amount}")
         }
     }
 
@@ -106,26 +95,8 @@ class User(
     fun getAccountLists(){
         println("El usuario cuenta con las siguientes cuentas: ")
         accountLists.forEach {
-            println("${it.accountName} con un balance de ${it.balanceSheet} y una divisa ${it.currency}")
+            println("${it.accountName} con un balance de ${it.balance} y una divisa ${it.currency}")
         }
-    }
-
-    fun createMovement(){
-        println("Ingresa el nombre del movimiento")
-        val movementName = readLine().toString()
-        println("Ingresa la descripcion del movimiento")
-        val movementDescription = readLine().toString()
-        println("Ingresa el monto del movimiento")
-        val movementAmount = readLine()!!.toFloat()
-        println("Ingresa el periodo del movimiento")
-        val movementPeriod = readLine().toString()
-
-        val movementCreated = Movement(movementName,
-            movementDescription,
-            movementAmount,
-            movementPeriod)
-
-        movementList.add(movementCreated)
     }
 
 }
