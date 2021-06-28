@@ -12,9 +12,10 @@ class User(
         println("Thanks for join us")
     }
 
+
     // Metodo para iniciar sesion que regresa true o false
     fun logIn(): Boolean {
-
+     
         println("Ingresa tu email")
         val inputEmail = readLine().toString()
         println("Ingresa tu contrasena")
