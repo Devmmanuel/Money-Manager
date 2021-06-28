@@ -7,32 +7,43 @@ class User(
     var totalExpenses: Float = 0f ) {
 
     val accountLists = mutableListOf<Account>()
+    var validSes : Boolean = false
 
     init {
         println("Thanks for join us")
     }
 
+    fun getUserName() : String{
+        return username
+    }
 
     // Metodo para iniciar sesion que regresa true o false
-    fun logIn(): Boolean {
+    fun logIn() {
      
         println("Ingresa tu email")
         val inputEmail = readLine().toString()
         println("Ingresa tu contrasena")
         val inputPassword = readLine().toString()
 
-        return if (inputEmail == email && inputPassword == password) {
+        if (inputEmail == email && inputPassword == password) {
             println("Welcome $username")
-            true
+            validSes=true
+
         } else {
+            validSes=false
             println("email &/or password are incorrect")
-            false
+
         }
+    }
+
+    fun validSesion() :Boolean {
+        return validSes
     }
 
     // Metodo para cerrar sesion
     fun logOut() {
-        if (logIn()) {
+        if (validSesion()) {
+            validSes= false
             println("Cerrando Sesión")
         }
     }
@@ -40,7 +51,7 @@ class User(
     // funcion para crear una cuenta
     fun createAccount() {
 
-        if (logIn()){
+        if (validSesion()){
             println("Ingresa el nombre de la cuenta: ")
             val accountName = readLine().toString()
             println("Ingresa el balance de la cuenta")
@@ -95,8 +106,84 @@ class User(
     fun getAccountLists(){
         println("El usuario cuenta con las siguientes cuentas: ")
         accountLists.forEach {
-            println("${it.accountName} con un balance de ${it.balance} y una divisa ${it.currency}")
+            println("->${it.getAccountName()} con un balance de ${it.getBalance()} y una divisa ${it.getCurrency()}")
         }
+    }
+
+    fun getAccount(NombreDeCuenta : String) : Account{
+        var cuenta1 = Account("Null",0f)
+        for (cuenta in accountLists){
+            if (cuenta.getAccountName()==NombreDeCuenta){
+                cuenta1 = cuenta
+                println("Has seleccionado $NombreDeCuenta")
+            }else{
+                println("No existe esa cuenta")
+            }
+        }
+        return cuenta1
+    }
+
+    fun desplegarMenu() {
+        do {
+            println("-----Bienvenido ${getUserName()}-----")
+            println("¿Que acción desea realizar")
+            println(
+                """
+            1 -> Agregar una cuenta"
+            2 -> Ver Cuentas
+            3 -> Agregar una gasto
+            4 -> Agregar un ingreso
+            5 -> Cerrar Sesion""".trimMargin()
+
+            )
+            val choice = readLine().toString()
+            when (choice) {
+                "1" -> {
+                    createAccount()
+                }
+                "2" -> {
+                    getAccountLists()
+                }
+                "3" -> {
+                    println("A que cuenta desea agregar el gasto")
+                    getAccountLists()
+
+                    println("Teclee el nombre de la cuenta")
+                    val opcion = readLine().toString()
+                    val cuenta = getAccount(opcion)
+
+                    println("Ingresa el nombre del gasto: ")
+                    val nombreGasto = readLine().toString()
+                    println("Ingresa una descripción del gasto")
+                    val descripcionGasto = readLine().toString()
+                    println("Ingresa el monto del gasto")
+                    val montoGasto = readLine()!!.toFloat()
+                    println("Ingresa la fecha del gasto")
+                    val fechaGasto = readLine().toString()
+                    cuenta.addExpense(Movement(nombreGasto, descripcionGasto, montoGasto, fechaGasto))
+                }
+                "4" -> {
+                    println("A que cuenta desea agregar el ingreso")
+                    getAccountLists()
+
+                    println("Teclee el nombre de la cuenta")
+                    val opcion = readLine().toString()
+                    val cuenta = getAccount(opcion)
+
+                    println("Ingresa el nombre del ingreso: ")
+                    val nombreIngreso = readLine().toString()
+                    println("Ingresa una descripción del ingreso")
+                    val descripcionIngreso = readLine().toString()
+                    println("Ingresa el monto del ingreso")
+                    val montoIngreso = readLine()!!.toFloat()
+                    println("Ingresa la fecha del ingreso")
+                    val fechaIngreso = readLine().toString()
+                    cuenta.addIncome(Movement(nombreIngreso, descripcionIngreso, montoIngreso, fechaIngreso))
+                }
+                "5" -> logOut()
+            }
+
+        }while (choice != "5")
     }
 
 }

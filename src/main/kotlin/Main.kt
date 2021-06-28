@@ -67,6 +67,9 @@ fun main() {
     val user = User("dev@gmail.com","password","emmanuel")
 
     user.logIn()
-    user.createAccount()
+    user.desplegarMenu()
+
+
+
 
 }

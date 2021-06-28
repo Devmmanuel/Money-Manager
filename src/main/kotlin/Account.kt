@@ -39,6 +39,10 @@ class Account(
         return accountName
     }
 
+    fun getCurrency() :String {
+        return currency
+    }
+
     fun printDetails(){
         println("""
             El nombre de la cuenta es $accountName 
