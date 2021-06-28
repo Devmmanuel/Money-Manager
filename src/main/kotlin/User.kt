@@ -1,9 +1,10 @@
-class User () {
-
-    val userSaved : String = "user123"
-    val passwordSaved : String = "12345"
 
 
+
+class User() {
+
+    private val userSaved : String = "user123"
+    private val passwordSaved : String = "12345"
 
 
     //función para loggear usuario
