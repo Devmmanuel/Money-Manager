@@ -1,16 +1,14 @@
 
 class User(
-    var email: String,
-    var password: String,
-    var username: String,
-    var balanceSheetGeneral: Float = 0f,
-    var totalExpenses: Float = 0f ) {
+    private var email: String,
+    private var password: String,
+    private var username: String) {
 
     val accountLists = mutableListOf<Account>()
     var validSes : Boolean = false
 
     init {
-        println("Thanks for join us")
+        println("Gracias por unirte a Money Manager")
     }
 
     fun getUserName() : String{
@@ -26,12 +24,12 @@ class User(
         val inputPassword = readLine().toString()
 
         if (inputEmail == email && inputPassword == password) {
-            println("Welcome $username")
+            println("Bienvenido $username")
             validSes=true
 
         } else {
             validSes=false
-            println("email &/or password are incorrect")
+            println("Email y/o contraseña incorrectos")
 
         }
     }
@@ -59,10 +57,12 @@ class User(
             println("Ingresa la divisa de la cuenta")
             val accountCoin = readLine().toString()
 
-            balanceSheetGeneral += accountBalanceSheet
             val accountCreated = Account(accountName, accountBalanceSheet, accountCoin)
 
             accountLists.add(accountCreated)
+
+            println("La cuenta $accountName ha sido creada")
+            println()
         }
 
         else {
@@ -73,7 +73,7 @@ class User(
     // funcion para cambiar la contraseña o Email
     fun changePasswordOrEmail(){
         println("Que deseas cambiar la contrasena o el Email")
-        val opcion = readLine().toString().toLowerCase()
+        val opcion = readLine().toString().lowercase()
 
         val input: String
 
@@ -104,9 +104,18 @@ class User(
     }
 
     fun getAccountLists(){
-        println("El usuario cuenta con las siguientes cuentas: ")
-        accountLists.forEach {
-            println("->${it.getAccountName()} con un balance de ${it.getBalance()} y una divisa ${it.getCurrency()}")
+
+        val sizeList = accountLists.size
+
+        if (sizeList != 0) {
+            println(" el usuario  $username cuenta con las siguientes cuentas: ")
+            accountLists.forEach {
+                println(" -> ${it.printDetails()} ")
+            }
+        }
+
+        else {
+            println("Lo siento $username aun no cuentas con ninguna cuenta")
         }
     }
 
@@ -137,7 +146,7 @@ class User(
             println("¿Que acción desea realizar")
             println(
                 """
-            1 -> Agregar una cuenta"
+            1 -> Agregar una cuenta
             2 -> Ver Cuentas
             3 -> Agregar una gasto
             4 -> Agregar un ingreso
@@ -154,7 +163,6 @@ class User(
                 "2" -> {
                     println("-------------------------------------------")
                     getAccountLists()
-                    println("---Balance General: ${getGeneralBalance()}---")
                     println("-------------------------------------------")
                 }
                 "3" -> {
