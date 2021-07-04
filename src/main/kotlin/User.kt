@@ -3,8 +3,7 @@ class User(
     var email: String,
     var password: String,
     var username: String,
-    var balanceSheetGeneral: Float = 0f,
-    var totalExpenses: Float = 0f ) {
+    var balanceSheetGeneral: Float = 0f) {
 
     val accountLists = mutableListOf<Account>()
     var validSes : Boolean = false
@@ -73,7 +72,7 @@ class User(
     // funcion para cambiar la contraseña o Email
     fun changePasswordOrEmail(){
         println("Que deseas cambiar la contrasena o el Email")
-        val opcion = readLine().toString().toLowerCase()
+        val opcion = readLine().toString().lowercase()
 
         val input: String
 
@@ -104,9 +103,18 @@ class User(
     }
 
     fun getAccountLists(){
-        println("El usuario cuenta con las siguientes cuentas: ")
-        accountLists.forEach {
-            println("->${it.getAccountName()} con un balance de ${it.getBalance()} y una divisa ${it.getCurrency()}")
+
+        val sizeList = accountLists.size
+
+        if (sizeList != 0) {
+            println(" el usuario  $username cuenta con las siguientes cuentas: ")
+            accountLists.forEach {
+                println(" -> ${it.printDetails()} ")
+            }
+        }
+
+        else {
+            println("Lo siento $username aun no cuentas con ninguna cuenta")
         }
     }
 
@@ -137,7 +145,7 @@ class User(
             println("¿Que acción desea realizar")
             println(
                 """
-            1 -> Agregar una cuenta"
+            1 -> Agregar una cuenta
             2 -> Ver Cuentas
             3 -> Agregar una gasto
             4 -> Agregar un ingreso
@@ -154,7 +162,6 @@ class User(
                 "2" -> {
                     println("-------------------------------------------")
                     getAccountLists()
-                    println("---Balance General: ${getGeneralBalance()}---")
                     println("-------------------------------------------")
                 }
                 "3" -> {
