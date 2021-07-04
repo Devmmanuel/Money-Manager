@@ -2,14 +2,13 @@
 class User(
     private var email: String,
     private var password: String,
-    private var username: String,
-    private var balanceSheetGeneral: Float = 0f) {
+    private var username: String) {
 
     val accountLists = mutableListOf<Account>()
     var validSes : Boolean = false
 
     init {
-        println("Thanks for join us")
+        println("Gracias por unirte a Money Manager")
     }
 
     fun getUserName() : String{
@@ -25,12 +24,12 @@ class User(
         val inputPassword = readLine().toString()
 
         if (inputEmail == email && inputPassword == password) {
-            println("Welcome $username")
+            println("Bienvenido $username")
             validSes=true
 
         } else {
             validSes=false
-            println("email &/or password are incorrect")
+            println("Email y/o contraseña incorrectos")
 
         }
     }
@@ -58,12 +57,12 @@ class User(
             println("Ingresa la divisa de la cuenta")
             val accountCoin = readLine().toString()
 
-            balanceSheetGeneral += accountBalanceSheet
             val accountCreated = Account(accountName, accountBalanceSheet, accountCoin)
 
             accountLists.add(accountCreated)
 
             println("La cuenta $accountName ha sido creada")
+            println()
         }
 
         else {
