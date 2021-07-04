@@ -1,9 +1,9 @@
 
 class User(
-    var email: String,
-    var password: String,
-    var username: String,
-    var balanceSheetGeneral: Float = 0f) {
+    private var email: String,
+    private var password: String,
+    private var username: String,
+    private var balanceSheetGeneral: Float = 0f) {
 
     val accountLists = mutableListOf<Account>()
     var validSes : Boolean = false
@@ -62,6 +62,8 @@ class User(
             val accountCreated = Account(accountName, accountBalanceSheet, accountCoin)
 
             accountLists.add(accountCreated)
+
+            println("La cuenta $accountName ha sido creada")
         }
 
         else {
