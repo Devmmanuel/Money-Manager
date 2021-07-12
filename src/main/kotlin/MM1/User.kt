@@ -1,3 +1,4 @@
+package MM1
 
 class User(
     private var email: String,
@@ -119,7 +120,7 @@ class User(
         }
     }
 
-    fun getAccount(NombreDeCuenta : String) : Account{
+    fun getAccount(NombreDeCuenta : String) : Account {
         var cuenta1 = Account("Null",0f)
         for (cuenta in accountLists){
             if (cuenta.getAccountName()==NombreDeCuenta){
@@ -140,90 +141,7 @@ class User(
         return TotalBalance
     }
 
-    fun desplegarMenu() {
-        do {
-            println("-----Bienvenido ${getUserName()}-----")
-            println("¿Que acción desea realizar")
-            println(
-                """
-            1 -> Agregar una cuenta
-            2 -> Ver Cuentas
-            3 -> Agregar una gasto
-            4 -> Agregar un ingreso
-            5 -> Ver gastos
-            6 -> Ver Ingresos
-            7 -> Cerrar Sesion""".trimMargin()
 
-            )
-            val choice = readLine().toString()
-            when (choice) {
-                "1" -> {
-                    createAccount()
-                }
-                "2" -> {
-                    println("-------------------------------------------")
-                    getAccountLists()
-                    println("-------------------------------------------")
-                }
-                "3" -> {
-                    println("A que cuenta desea agregar el gasto")
-                    getAccountLists()
-
-                    println("Teclee el nombre de la cuenta")
-                    val opcion = readLine().toString()
-                    val cuenta = getAccount(opcion)
-
-                    println("Ingresa el nombre del gasto: ")
-                    val nombreGasto = readLine().toString()
-                    println("Ingresa una descripción del gasto")
-                    val descripcionGasto = readLine().toString()
-                    println("Ingresa el monto del gasto")
-                    val montoGasto = readLine()!!.toFloat()
-                    println("Ingresa la fecha del gasto")
-                    val fechaGasto = readLine().toString()
-                    cuenta.addExpense(Movement(nombreGasto, descripcionGasto, montoGasto, fechaGasto))
-                }
-                "4" -> {
-                    println("A que cuenta desea agregar el ingreso")
-                    getAccountLists()
-
-                    println("Teclee el nombre de la cuenta")
-                    val opcion = readLine().toString()
-                    val cuenta = getAccount(opcion)
-
-                    println("Ingresa el nombre del ingreso: ")
-                    val nombreIngreso = readLine().toString()
-                    println("Ingresa una descripción del ingreso")
-                    val descripcionIngreso = readLine().toString()
-                    println("Ingresa el monto del ingreso")
-                    val montoIngreso = readLine()!!.toFloat()
-                    println("Ingresa la fecha del ingreso")
-                    val fechaIngreso = readLine().toString()
-                    cuenta.addIncome(Movement(nombreIngreso, descripcionIngreso, montoIngreso, fechaIngreso))
-                }
-                "5" -> {
-                    println("De que cuenta desea visualizar los gastos")
-                    getAccountLists()
-
-                    println("Teclee el nombre de la cuenta")
-                    val opcion = readLine().toString()
-                    val cuenta = getAccount(opcion)
-                    cuenta.printExpensesList()
-                }
-                "6" -> {
-                    println("De que cuenta desea visualizar los Ingresos")
-                    getAccountLists()
-
-                    println("Teclee el nombre de la cuenta")
-                    val opcion = readLine().toString()
-                    val cuenta = getAccount(opcion)
-                    cuenta.printIncomeList()
-                }
-                "7" -> logOut()
-            }
-
-        }while (choice != "7")
-    }
 
 }
 
