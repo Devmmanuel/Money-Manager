@@ -91,16 +91,28 @@ fun main() {
                 }
             }
             "2" -> {
+
+                var inputEmail = ""
+
                 print("Ingrese un username: ")
                 val inputUserName = readLine().toString()
-                print("Ingrese un email: ")
-                val inputEmail = readLine().toString()
+                var mailvalid = false
+
+                while(mailvalid != true){
+                    print("Ingrese un email valido: ")
+                    val expreg_mail = "^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})"
+                    inputEmail = readLine().toString()
+                    mailvalid = expreg_mail.toRegex().matches(inputEmail)
+                }
+
                 print("Ingrese una contraseña: ")
                 val inputPassword = readLine().toString()
+
                 listaUsers.add(User(inputEmail, inputPassword, inputUserName))
                 println("Usuario $inputUserName creado exitosamente")
-                println()
             }
+
+
             "3" -> {
                 println("Cerrando aplicación")
             }
