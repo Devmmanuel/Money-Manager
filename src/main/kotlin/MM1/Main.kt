@@ -167,25 +167,32 @@ fun desplegarMenu(user : User) {
             }
             "3" -> {
                 println("A que cuenta desea agregar el gasto")
-                user.getAccountLists()
+                val gastos = user.getAccountLists()
 
-                println("Teclee el nombre de la cuenta")
-                val opcion = readLine().toString()
-                val cuenta = user.getAccount(opcion)
+                    if(gastos != 0){
+                        println("Teclee el nombre de la cuenta")
+                        val opcion = readLine().toString()
+                        val cuenta = user.getAccount(opcion)
 
-                println("Ingresa el nombre del gasto: ")
-                val nombreGasto = readLine().toString()
-                println("Ingresa una descripción del gasto")
-                val descripcionGasto = readLine().toString()
-                println("Ingresa el monto del gasto")
-                val montoGasto = readLine()!!.toFloat()
-                println("Ingresa la fecha del gasto")
-                val fechaGasto = readLine().toString()
-                cuenta.addExpense(Movement(nombreGasto, descripcionGasto, montoGasto, fechaGasto))
+                        println("Ingresa el nombre del gasto: ")
+                        val nombreGasto = readLine().toString()
+                        println("Ingresa una descripción del gasto")
+                        val descripcionGasto = readLine().toString()
+                        println("Ingresa el monto del gasto")
+                        val montoGasto = readLine()!!.toFloat()
+                        println("Ingresa la fecha del gasto")
+                        val fechaGasto = readLine().toString()
+                        cuenta.addExpense(Movement(nombreGasto, descripcionGasto, montoGasto, fechaGasto))
+                    }
+                    else{
+                        println("Debe de crear una cuenta primero")
+                    }
+
             }
             "4" -> {
                 println("A que cuenta desea agregar el ingreso")
                 user.getAccountLists()
+
 
                 println("Teclee el nombre de la cuenta")
                 val opcion = readLine().toString()

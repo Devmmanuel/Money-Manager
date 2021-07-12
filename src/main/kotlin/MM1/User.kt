@@ -103,8 +103,7 @@ class User(
         }
     }
 
-    fun getAccountLists(){
-
+    fun getAccountLists() : Int{
         val sizeList = accountLists.size
 
         if (sizeList != 0) {
@@ -112,10 +111,12 @@ class User(
             accountLists.forEach {
                 it.printDetails()
             }
+        return 1
         }
 
         else {
             println("Lo siento $username aun no cuenta con ninguna cuenta")
+            return 0
         }
     }
 
