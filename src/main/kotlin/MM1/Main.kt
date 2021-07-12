@@ -98,16 +98,19 @@ fun main() {
                 val inputUserName = readLine().toString()
                 var mailvalid = false
 
+                //Si no se ingresa un email válido, se seguirá pidiendo que se ingrese
                 while(mailvalid != true){
                     print("Ingrese un email valido: ")
+                    //Expresion regular que valida que es un email
                     val expreg_mail = "^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})"
                     inputEmail = readLine().toString()
                     mailvalid = expreg_mail.toRegex().matches(inputEmail)
                 }
 
+                //Usuario crea contraseña
                 print("Ingrese una contraseña: ")
                 val inputPassword = readLine().toString()
-
+                //Se crea el usuario
                 listaUsers.add(User(inputEmail, inputPassword, inputUserName))
                 println("Usuario $inputUserName creado exitosamente")
             }
@@ -178,10 +181,10 @@ fun desplegarMenu(user : User) {
                 println("-------------------------------------------")
             }
             "3" -> {
-                println("A que cuenta desea agregar el gasto")
                 val gastos = user.getAccountLists()
 
                     if(gastos != 0){
+                        println("A que cuenta desea agregar el gasto")
                         println("Teclee el nombre de la cuenta")
                         val opcion = readLine().toString()
                         val cuenta = user.getAccount(opcion)
@@ -196,47 +199,51 @@ fun desplegarMenu(user : User) {
                         val fechaGasto = readLine().toString()
                         cuenta.addExpense(Movement(nombreGasto, descripcionGasto, montoGasto, fechaGasto))
                     }
-                    else{
-                        println("Debe de crear una cuenta primero")
-                    }
 
             }
             "4" -> {
-                println("A que cuenta desea agregar el ingreso")
-                user.getAccountLists()
+                val ingreso = user.getAccountLists()
 
+                if(ingreso!= 0 ){
+                    println("A que cuenta desea agregar el ingreso")
+                    println("Teclee el nombre de la cuenta")
+                    val opcion = readLine().toString()
+                    val cuenta = user.getAccount(opcion)
 
-                println("Teclee el nombre de la cuenta")
-                val opcion = readLine().toString()
-                val cuenta = user.getAccount(opcion)
+                    println("Ingresa el nombre del ingreso: ")
+                    val nombreIngreso = readLine().toString()
+                    println("Ingresa una descripción del ingreso")
+                    val descripcionIngreso = readLine().toString()
+                    println("Ingresa el monto del ingreso")
+                    val montoIngreso = readLine()!!.toFloat()
+                    println("Ingresa la fecha del ingreso")
+                    val fechaIngreso = readLine().toString()
+                    cuenta.addIncome(Movement(nombreIngreso, descripcionIngreso, montoIngreso, fechaIngreso))
+                }
 
-                println("Ingresa el nombre del ingreso: ")
-                val nombreIngreso = readLine().toString()
-                println("Ingresa una descripción del ingreso")
-                val descripcionIngreso = readLine().toString()
-                println("Ingresa el monto del ingreso")
-                val montoIngreso = readLine()!!.toFloat()
-                println("Ingresa la fecha del ingreso")
-                val fechaIngreso = readLine().toString()
-                cuenta.addIncome(Movement(nombreIngreso, descripcionIngreso, montoIngreso, fechaIngreso))
             }
             "5" -> {
-                println("De que cuenta desea visualizar los gastos")
-                user.getAccountLists()
+                val ver_gastos = user.getAccountLists()
+                if(ver_gastos != 0){
+                    println("De que cuenta desea visualizar los gastos")
+                    println("Teclee el nombre de la cuenta")
+                    val opcion = readLine().toString()
+                    val cuenta = user.getAccount(opcion)
+                    cuenta.printExpensesList()
+                }
 
-                println("Teclee el nombre de la cuenta")
-                val opcion = readLine().toString()
-                val cuenta = user.getAccount(opcion)
-                cuenta.printExpensesList()
             }
             "6" -> {
-                println("De que cuenta desea visualizar los Ingresos")
-                user.getAccountLists()
+                val ver_ingreso = user.getAccountLists()
 
-                println("Teclee el nombre de la cuenta")
-                val opcion = readLine().toString()
-                val cuenta = user.getAccount(opcion)
-                cuenta.printIncomeList()
+                if(ver_ingreso != 0){
+                    println("De que cuenta desea visualizar los Ingresos")
+                    println("Teclee el nombre de la cuenta")
+                    val opcion = readLine().toString()
+                    val cuenta = user.getAccount(opcion)
+                    cuenta.printIncomeList()
+                }
+
             }
             "7" -> user.logOut()
         }
