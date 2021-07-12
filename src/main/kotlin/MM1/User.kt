@@ -9,29 +9,28 @@ class User(
     var validSes : Boolean = false
 
     init {
-        println("Gracias por unirte a Money Manager")
+        //println("Gracias por unirte a Money Manager")
     }
 
     fun getUserName() : String{
         return username
     }
+    fun getEmail() : String {
+        return email
+    }
 
     // Metodo para iniciar sesion que regresa true o false
-    fun logIn() {
-     
-        println("Ingresa tu email")
-        val inputEmail = readLine().toString()
-        println("Ingresa tu contrasena")
-        val inputPassword = readLine().toString()
+    fun logIn(inputEmail : String, inputPassword : String) :Boolean{
 
         if (inputEmail == email && inputPassword == password) {
-            println("Bienvenido $username")
+            //println("Bienvenido $username")
             validSes=true
+            return true
 
         } else {
             validSes=false
-            println("Email y/o contraseña incorrectos")
-
+            //println("Email y/o contraseña incorrectos")
+            return false
         }
     }
 
@@ -109,14 +108,14 @@ class User(
         val sizeList = accountLists.size
 
         if (sizeList != 0) {
-            println(" el usuario  $username cuenta con las siguientes cuentas: ")
+            println("El usuario  $username cuenta con las siguientes cuentas: ")
             accountLists.forEach {
-                println(" -> ${it.printDetails()} ")
+                it.printDetails()
             }
         }
 
         else {
-            println("Lo siento $username aun no cuentas con ninguna cuenta")
+            println("Lo siento $username aun no cuenta con ninguna cuenta")
         }
     }
 

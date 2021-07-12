@@ -1,5 +1,7 @@
 package MM1
 
+import java.lang.IllegalArgumentException
+
 
 fun main() {
 
@@ -63,16 +65,81 @@ fun main() {
         }
     }
 */
-
+    //Set Default Settings
     val user = User("dev@gmail.com","password","emmanuel")
+    user.accountLists.add(Account("Main",0f,"MXN"))
 
-    user.logIn()
-    desplegarMenu(user)
+    //Lista de usuarios dentro de la app
+    val listaUsers = mutableListOf<User?>(user)
+    var currentUser :User? =null
 
-
+    do {
+        println("¡¡Gracias por utilizar Money Manager!!")
+        println("¿Que acción desea realizar?")
+        println(
+            """
+            1 -> Iniciar Sesion
+            2 -> Crear nuevo usuario
+            3 -> Cerrar aplicación""".trimMargin()
+        )
+        val choice = readLine().toString()
+        when (choice) {
+            "1" -> {
+                currentUser = cargarUser(listaUsers)
+                if (currentUser != null) {
+                    desplegarMenu(currentUser)
+                }
+            }
+            "2" -> {
+                print("Ingrese un username: ")
+                val inputUserName = readLine().toString()
+                print("Ingrese un email: ")
+                val inputEmail = readLine().toString()
+                print("Ingrese una contraseña: ")
+                val inputPassword = readLine().toString()
+                listaUsers.add(User(inputEmail, inputPassword, inputUserName))
+                println("Usuario $inputUserName creado exitosamente")
+                println()
+            }
+            "3" -> {
+                println("Cerrando aplicación")
+            }
+        }
+    }while(choice!="3")
 
 
 }
+
+fun cargarUser(listaU : List<User?>) : User? {
+    var userVal = false
+    var passwVal = false
+    var usuario :User? = null
+    println("Ingrese su email")
+    val inputEmail = readLine().toString()
+    listaU.forEach{
+        if(it?.getEmail()==inputEmail){
+            println("Hola ${it.getUserName()}")
+            usuario = it
+            userVal = true
+        }
+    }
+    if (!userVal){
+        println("--No se encuentra registrado ese email, inténtelo de nuevo--")
+    }
+    if(userVal) {
+        println("Ingrese su contraseña")
+        val inputPassword = readLine().toString()
+        passwVal= usuario?.logIn(inputEmail,inputPassword)!!
+        if(passwVal){
+            println("Sesión iniciada correctamente, ${usuario?.getUserName()}")
+            return usuario
+        }else{
+            println("--Su contraseña es incorrecta, inténtelo de nuevo--")
+        }
+    }
+    return null
+}
+
 fun desplegarMenu(user : User) {
     do {
         println("-----Bienvenido ${user.getUserName()}-----")
