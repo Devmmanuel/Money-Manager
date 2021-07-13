@@ -43,7 +43,8 @@ class Account(
     fun printDetails(){
         println("""
             Nombre de la cuenta:     $accountName 
-            Balance de la cuenta:    ${getBalance()} $currency""".trimMargin())
+            Balance de la cuenta:    ${getBalance()} $currency
+            ----------------------------------------------------""".trimMargin())
     }
 
     fun addExpense(movement : Movement) {

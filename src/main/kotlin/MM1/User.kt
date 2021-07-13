@@ -110,6 +110,7 @@ class User(
 
         if (sizeList != 0) {
             println("El usuario  $username cuenta con las siguientes cuentas: ")
+            println()
             accountLists.forEach {
                 it.printDetails()
             }
