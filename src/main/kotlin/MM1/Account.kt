@@ -2,15 +2,15 @@ package MM1
 
 class Account(
     private var accountName : String,
-    private var balance : Float = 0f,
+    private var balanceInicial : Float = 0f,
     private var currency : String = "MXN") {
 
 
     private val expenses = mutableListOf<Movement>()
     private var incomes = mutableListOf<Movement>()
 
-    private var totalAmountIncome = 0f;
-    private var totalAmountExpenses = 0f;
+    //private var totalAmountIncome = 0f;
+    //private var totalAmountExpenses = 0f;
 
 
     fun printExpensesList() {
@@ -29,60 +29,47 @@ class Account(
     }
 
     fun editBalance (newBalance : Float){ //Funcion especial, lo mejor es no usarlo
-        balance = newBalance
+        balanceInicial = newBalance
     }
 
     fun getBalance() :Float {
-        return balance
+        return balanceInicial + getTotalIncome() - getTotalExpense()
     }
 
     fun getAccountName() : String {
         return accountName
     }
 
-    fun getCurrency() :String {
-        return currency
-    }
-
     fun printDetails(){
         println("""
-            El nombre de la cuenta es $accountName 
-            El balance de la cuenta es $balance $currency""".trimMargin())
+            Nombre de la cuenta:     $accountName 
+            Balance de la cuenta:    ${getBalance()} $currency""".trimMargin())
     }
 
     fun addExpense(movement : Movement) {
         expenses.add(movement)
-        totalAmountExpenses +=movement.getAmount()
-        balance -= movement.getAmount()
+        //totalAmountExpenses +=movement.getAmount()
+        //balance -= movement.getAmount()
     }
     fun addIncome(movement: Movement) {
         incomes.add(movement)
-        totalAmountIncome +=movement.getAmount()
-        balance +=movement.getAmount()
+        //totalAmountIncome +=movement.getAmount()
+        //balance +=movement.getAmount()
     }
 
     //Metodo que retorna el dato calculado en base a la lista de incomes
     fun getTotalIncome() : Float {
         var TotalIncome : Float = 0f
-        incomes.forEach {
-            TotalIncome += it.getAmount()
-        }
+        incomes.map { TotalIncome += it.getAmount() }
         return TotalIncome
     }
 
     //Metodo que retorna el dato calculado en base a la lista de expenses
     fun getTotalExpense() : Float {
         var totalExpense : Float = 0f
-        expenses.forEach() {
-            totalExpense +=it.getAmount()
-        }
+        expenses.map { totalExpense +=it.getAmount() }
         return totalExpense
     }
-
-
-
-
-
 
 
 }

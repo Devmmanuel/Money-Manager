@@ -1,5 +1,7 @@
 package MM1
 
+import java.lang.IllegalArgumentException
+
 class User(
     private var email: String,
     private var password: String,
@@ -120,9 +122,21 @@ class User(
         }
     }
 
-    fun getAccount(NombreDeCuenta : String) : Account {
-        var cuenta1 = Account("Null",0f)
-        for (cuenta in accountLists){
+    fun getAccount(NombreDeCuenta : String) : Account? {
+        //val cuenta1 : List<Account?>
+            val cuenta1: List<Account?> = accountLists.filter { it.getAccountName() == NombreDeCuenta }
+
+        if (cuenta1.size!=0){
+            println("Has seleccionado la cuenta ${cuenta1[0]?.getAccountName()}")
+            return cuenta1[0]
+        }else{
+            println("No existe esa cuenta, inténtelo de nuevo")
+            return null
+        }
+
+
+
+        /*for (cuenta in accountLists){
             if (cuenta.getAccountName()==NombreDeCuenta){
                 cuenta1 = cuenta
                 println("Has seleccionado $NombreDeCuenta")
@@ -130,7 +144,12 @@ class User(
                 println("No existe esa cuenta")
             }
         }
-        return cuenta1
+         */
+
+    }
+
+    fun fail(message : String) :Nothing{
+        throw IllegalArgumentException(message)
     }
     fun getGeneralBalance() : Float{
         var TotalBalance = 0f

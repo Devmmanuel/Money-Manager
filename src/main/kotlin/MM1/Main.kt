@@ -185,10 +185,7 @@ fun desplegarMenu(user : User) {
 
                     if(gastos != 0){
                         println("A que cuenta desea agregar el gasto")
-                        println("Teclee el nombre de la cuenta")
-                        val opcion = readLine().toString()
-                        val cuenta = user.getAccount(opcion)
-
+                        val cuenta = cargarCuenta(user)
                         println("Ingresa el nombre del gasto: ")
                         val nombreGasto = readLine().toString()
                         println("Ingresa una descripción del gasto")
@@ -206,10 +203,7 @@ fun desplegarMenu(user : User) {
 
                 if(ingreso!= 0 ){
                     println("A que cuenta desea agregar el ingreso")
-                    println("Teclee el nombre de la cuenta")
-                    val opcion = readLine().toString()
-                    val cuenta = user.getAccount(opcion)
-
+                    val cuenta = cargarCuenta(user)
                     println("Ingresa el nombre del ingreso: ")
                     val nombreIngreso = readLine().toString()
                     println("Ingresa una descripción del ingreso")
@@ -226,9 +220,7 @@ fun desplegarMenu(user : User) {
                 val ver_gastos = user.getAccountLists()
                 if(ver_gastos != 0){
                     println("De que cuenta desea visualizar los gastos")
-                    println("Teclee el nombre de la cuenta")
-                    val opcion = readLine().toString()
-                    val cuenta = user.getAccount(opcion)
+                    val cuenta = cargarCuenta(user)
                     cuenta.printExpensesList()
                 }
 
@@ -238,9 +230,7 @@ fun desplegarMenu(user : User) {
 
                 if(ver_ingreso != 0){
                     println("De que cuenta desea visualizar los Ingresos")
-                    println("Teclee el nombre de la cuenta")
-                    val opcion = readLine().toString()
-                    val cuenta = user.getAccount(opcion)
+                    val cuenta = cargarCuenta(user)
                     cuenta.printIncomeList()
                 }
 
@@ -249,4 +239,14 @@ fun desplegarMenu(user : User) {
         }
 
     }while (choice != "7")
+}
+
+fun cargarCuenta(user : User) : Account{
+    var cuenta : Account?
+    do {
+        println("Teclee el nombre de la cuenta")
+        val opcion = readLine().toString()
+        cuenta= user.getAccount(opcion)
+    }while (cuenta==null)
+    return cuenta
 }
