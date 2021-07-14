@@ -1,7 +1,10 @@
 package MM1
 
 import java.lang.IllegalArgumentException
-
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 fun main() {
 
@@ -146,6 +149,15 @@ fun cargarUser(listaU : List<User?>) : User? {
         val inputPassword = readLine().toString()
         passwVal= usuario?.logIn(inputEmail,inputPassword)!!
         if(passwVal){
+            runBlocking {
+                print("Iniciando sesion")
+                for(i in 1..10) {
+                    print(".")
+                    delay(500)
+                }
+            }
+            println()
+
             println("Sesión iniciada correctamente, ${usuario?.getUserName()}")
             return usuario
         }else{
