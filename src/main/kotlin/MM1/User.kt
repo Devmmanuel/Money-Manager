@@ -153,14 +153,15 @@ class User(
     fun fail(message : String) :Nothing{
         throw IllegalArgumentException(message)
     }
+    /*
     fun getGeneralBalance() : Float{
         var TotalBalance = 0f
         for (cuenta in accountLists){
-            TotalBalance+=cuenta.getTotalIncome()
-            TotalBalance-=cuenta.getTotalExpense()
+            TotalBalance+=cuenta.getTotal(Incomes)
+            TotalBalance-=cuenta.getTotal(Expenses)
         }
         return TotalBalance
-    }
+    }*/
 
 
 

@@ -33,7 +33,7 @@ class Account(
     }
 
     fun getBalance() :Float {
-        return balanceInicial + getTotal(expenses) - getTotal(incomes)
+        return balanceInicial + getTotal(incomes) - getTotal(expenses)
     }
 
     fun getAccountName() : String {
