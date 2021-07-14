@@ -5,9 +5,8 @@ package MM1
     private val amount: Float,
     private val date: String
 ) {
-
      abstract fun getAmount() : Float
-    abstract fun getInfoMovements()
+     abstract fun getInfoMovements()
 
 
  }

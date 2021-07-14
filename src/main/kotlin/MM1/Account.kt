@@ -33,7 +33,7 @@ class Account(
     }
 
     fun getBalance() :Float {
-        return balanceInicial + getTotalIncome() + getTotalExpense()
+        return balanceInicial + getTotal(expenses) - getTotal(incomes)
     }
 
     fun getAccountName() : String {
@@ -61,18 +61,17 @@ class Account(
 
 
     //Metodo que retorna el dato calculado en base a la lista de incomes
-    fun getTotalIncome() : Float {
-        var TotalIncome : Float = 0f
-        incomes.map { TotalIncome += it.getAmount() }
-        return TotalIncome
-    }
+
 
     //Metodo que retorna el dato calculado en base a la lista de expenses
-    fun getTotalExpense() : Float {
-        var totalExpense : Float = 0f
-        expenses.map { totalExpense +=it.getAmount() }
-        return totalExpense
+
+
+    fun getTotal(Lista : List<Movement>) : Float {
+        var Total : Float = 0f
+        Lista.map { Total += it.getAmount() }
+        return Total
     }
+
 
 
 }
