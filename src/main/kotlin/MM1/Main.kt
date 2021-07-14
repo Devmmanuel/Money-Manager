@@ -206,7 +206,7 @@ fun desplegarMenu(user : User) {
                         val montoGasto = readLine()!!.toFloat()
                         println("Ingresa la fecha del gasto")
                         val fechaGasto = readLine().toString()
-                        cuenta.addExpense(Movement(nombreGasto, descripcionGasto, montoGasto, fechaGasto))
+                        cuenta.addExpense(Expenses(nombreGasto, descripcionGasto, montoGasto, fechaGasto))
                     }
 
             }
@@ -224,7 +224,7 @@ fun desplegarMenu(user : User) {
                     val montoIngreso = readLine()!!.toFloat()
                     println("Ingresa la fecha del ingreso")
                     val fechaIngreso = readLine().toString()
-                    cuenta.addIncome(Movement(nombreIngreso, descripcionIngreso, montoIngreso, fechaIngreso))
+                    cuenta.addIncome(Incomes(nombreIngreso, descripcionIngreso, montoIngreso, fechaIngreso))
                 }
 
             }

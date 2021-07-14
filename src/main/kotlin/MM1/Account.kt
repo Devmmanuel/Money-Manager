@@ -6,8 +6,8 @@ class Account(
     private var currency : String = "MXN") {
 
 
-    private val expenses = mutableListOf<Movement>()
-    private var incomes = mutableListOf<Movement>()
+    private val expenses = mutableListOf<Expenses>()
+    private var incomes = mutableListOf<Incomes>()
 
     //private var totalAmountIncome = 0f;
     //private var totalAmountExpenses = 0f;
@@ -33,7 +33,7 @@ class Account(
     }
 
     fun getBalance() :Float {
-        return balanceInicial + getTotalIncome() - getTotalExpense()
+        return balanceInicial + getTotalIncome() + getTotalExpense()
     }
 
     fun getAccountName() : String {
@@ -47,16 +47,18 @@ class Account(
             ----------------------------------------------------""".trimMargin())
     }
 
-    fun addExpense(movement : Movement) {
+    fun addExpense(movement : Expenses) {
         expenses.add(movement)
         //totalAmountExpenses +=movement.getAmount()
         //balance -= movement.getAmount()
     }
-    fun addIncome(movement: Movement) {
+    fun addIncome(movement: Incomes) {
         incomes.add(movement)
         //totalAmountIncome +=movement.getAmount()
         //balance +=movement.getAmount()
     }
+
+
 
     //Metodo que retorna el dato calculado en base a la lista de incomes
     fun getTotalIncome() : Float {
